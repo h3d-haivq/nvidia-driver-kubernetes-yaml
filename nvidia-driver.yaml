@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: nvidia-driver-daemonset
-  namespace: default
+  namespace: nvidia-driver
 spec:
   selector:
     matchLabels:
