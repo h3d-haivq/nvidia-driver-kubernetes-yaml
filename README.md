@@ -70,19 +70,54 @@ ___REMEMBER: NEVER INSTALL TWO TYPE OF DRIVER IN AN NODE WHICH HAS RUNNING NATIV
 
    * Case one, use containerized driver:
       Simply enter
-         ```bash
+      ```bash
          # Ubuntu 16.04
          kubectl create -f https://raw.githubusercontent.com/h3d-haivq/nvidia-driver-kubernetes-yaml/master/nvidia-driver-ubuntu1604.yaml
 
          # Ubuntu 18.04
          kubectl create -f https://raw.githubusercontent.com/h3d-haivq/nvidia-driver-kubernetes-yaml/master/nvidia-driver-ubuntu1804.yaml
-```
+      ```
 
-Case two, Use driver installed in the machine:
-Just install it like normal. Get the .RUN or .DEB file from the NVIDIA web page
+   * Case two, Use driver installed in the machine:
+      Just install it like normal. Get the .RUN or .DEB file from the NVIDIA web page
 
 ### 3. Install NVIDIA device plugin
 Simply enter
 ```bash
 kubectl create -f https://raw.githubusercontent.com/h3d-haivq/nvidia-driver-kubernetes-yaml/master/nvidia-device-plugin.yaml
 ```
+
+## How to make use of the NVIDIA device plugin:
+This plugin will make some rule to schedule the GPU for the pods on the node. You don't need to forcibly use `NVIDIA_VISIBLE_DEVICES` to make the workload runs correctly.
+
+Eg:
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gpu-pod
+spec:
+  containers:
+    - name: cuda-container
+      image: nvidia/cuda:10.1-runtime
+      resources:
+        limits:
+          nvidia.com/gpu: 2 # requesting 2 GPUs
+```
+In this case, any pod created by this YAML will consumes _no more than_ 2 GPUs, sperately from each other.
+
+If you want your workload to use _exactly_ 2 GPUs, modify the `spec` section of the YAML above like this:
+```yml
+...
+spec:
+  containers:
+    - name: cuda-container
+      image: nvidia/cuda:10.1-runtime
+      resources:
+        requests:
+          nvidia.com/gpu: 2
+        limits:
+          nvidia.com/gpu: 2
+```
+
+You can still use `NVIDIA_VISIBLE_DEVICES` variable if you want, which is kinda useless now.
