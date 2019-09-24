@@ -1,5 +1,7 @@
 # YAML file for NVIDIA Device support for Kubernetes
 
+Manage and schedule your nodes with ease. No more hard-config by `NVIDIA_VISIBLE_DEVICES=<ids>`
+
 ## Prequesites:
    - Have `docker` installed.
    - Have `nvidia-docker2` installed (this method is deprecated by docker, but kubernetes is still using it then it's fine) 
