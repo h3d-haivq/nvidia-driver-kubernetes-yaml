@@ -1,8 +1,8 @@
 # YAML file for NVIDIA Device support for Kubernetes
 
 ## Prequesite:
-   - Have docker installed.
-   - Have nvidia-docker2 installed (this method is deprecated by docker, but kubernetes is still using it then it's fine) 
+   - Have `docker` installed.
+   - Have `nvidia-docker2` installed (this method is deprecated by docker, but kubernetes is still using it then it's fine) 
    - Disabled some modules which crash NVIDIA Driver
    - Have the docker runtime set to `nvidia` instead of `runc`
 Every thing is mentioned in [this post](https://github.com/NVIDIA/nvidia-docker/wiki/Driver-containers-(Beta)#quickstart) 
