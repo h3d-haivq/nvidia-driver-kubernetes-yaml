@@ -1,6 +1,6 @@
 # YAML file for NVIDIA Device support for Kubernetes
 
-## Prequesite:
+## Prequesites:
    - Have `docker` installed.
    - Have `nvidia-docker2` installed (this method is deprecated by docker, but kubernetes is still using it then it's fine) 
    ```bash
@@ -88,7 +88,7 @@ kubectl create -f https://raw.githubusercontent.com/h3d-haivq/nvidia-driver-kube
 ```
 
 ## How to make use of the NVIDIA device plugin:
-This plugin will make some rule to schedule the GPU for the pods on the node. You don't need to forcibly use `NVIDIA_VISIBLE_DEVICES` to make the workload runs correctly.
+This plugin will make the K8s scheduler automatically schedules your workload and serves correct amount of GPU you want by just some easy config. It's achived by adding `nvidia.com/gpu: <number-of-gpus>` in the `spec.containers.resources` of the YAML.
 
 Eg:
 ```yml
