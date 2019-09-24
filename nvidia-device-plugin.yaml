@@ -18,6 +18,7 @@ spec:
     spec:
       nodeSelector:
         driver-type: container
+        server-type: render
       tolerations:
       # Allow this pod to be rescheduled while the node is in "critical add-ons only" mode.
       # This, along with the annotation above marks this pod as a critical add-on.
