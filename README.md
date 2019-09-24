@@ -53,8 +53,9 @@ cp        Ready    controlplane,etcd          18d    v1.14.5    key1=value1,key2
 ```
 Label the node you want:
 There's two kind of key-value pair you need to assign to the node:
-   - `server-type=render` to mark the node as a GPU compatible
-   - `driver-type=container` if you want to install driver in a container.
+   - `server-type=render` to mark the node as a GPU compatible. (required)
+   - `driver-type=container` if you want to install driver in a container. If not, skip this label.
+   
 Assign the label by this command
 ```bash
 kubectl label nodes <your-node-name> <your-key>=<your-value>
