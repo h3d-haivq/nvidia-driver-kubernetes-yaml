@@ -65,17 +65,20 @@ kubectl label nodes gpu1 driver-type=container
 kubectl label nodes gpu1 server-type=render
 ```
 ### 2. Install NVIDIA Driver:
-Case one - Use containerized driver:
-Simply enter
-```bash
-# Ubuntu 16.04
-kubectl create -f https://raw.githubusercontent.com/h3d-haivq/nvidia-driver-kubernetes-yaml/master/nvidia-driver-ubuntu1604.yaml
 
-# Ubuntu 18.04
-kubectl create -f https://raw.githubusercontent.com/h3d-haivq/nvidia-driver-kubernetes-yaml/master/nvidia-driver-ubuntu1804.yaml
+___REMEMBER: NEVER INSTALL TWO TYPE OF DRIVER IN AN NODE WHICH HAS RUNNING NATIVE DRIVER, THIS WILL CRASH THE DRIVER WHICH IS INSTALLED LATER AND MAY MAKE THE K8S SCHEDULER CONFUSED AND CRASH THE NODE__
+
+   * Case one, use containerized driver:
+      Simply enter
+         ```bash
+         # Ubuntu 16.04
+         kubectl create -f https://raw.githubusercontent.com/h3d-haivq/nvidia-driver-kubernetes-yaml/master/nvidia-driver-ubuntu1604.yaml
+
+         # Ubuntu 18.04
+         kubectl create -f https://raw.githubusercontent.com/h3d-haivq/nvidia-driver-kubernetes-yaml/master/nvidia-driver-ubuntu1804.yaml
 ```
 
-Case two - Use driver installed in the machine:
+Case two, Use driver installed in the machine:
 Just install it like normal. Get the .RUN or .DEB file from the NVIDIA web page
 
 ### 3. Install NVIDIA device plugin
